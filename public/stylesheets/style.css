@@ -1,0 +1,81 @@
+body {
+  /*background-image: url("../images/front.jpg");*/
+  background-color: lightgreen;
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+img{
+  object-fit: cover;
+}
+
+/* TODO center all other elements too, with this class*/
+.center_for_title {
+    margin: auto;
+    width: 35%;
+    margin-bottom: 50px;
+}
+
+.center_for_inputs {
+  margin: auto;
+  width: 20%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.center_for_buttons {
+  margin: auto;
+  width : 18%;
+  /*border : 3px solid #082eff;*/
+  padding: 2px;
+  margin-bottom: 30px;
+}
+
+.invalid_message {
+  margin: auto;
+  width: 22%;
+  color: firebrick;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.client_list {
+  margin : auto;
+  width: 30%;
+  text-align: center;
+}
+
+.client_list_heading {
+  margin : auto;
+  width: 20%;
+  margin-bottom: 15px;
+}
+
+.no_client_message {
+  color: firebrick;
+}
+
+
+.client {
+  /*margin-bottom: 20px;*/
+}
+/* make sure that the input fields have some space between eachother: */
+input {
+  width: 210px;
+  margin-bottom: 20px;
+}
+
+/*TODO style the buttons*/
+button {
+  border: none;
+  font-weight: 900;
+  margin-bottom: 20px;
+  /*font-size: 20px;*/
+  /*width: 100px;*/
+  /*height: 20px;*/
+}
+
+a {
+  color: #00B7FF;
+}

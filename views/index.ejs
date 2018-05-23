@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1 class="center_for_title"><%= title %></h1>
+
+      <form method="post">
+
+        <div class="center_for_inputs">
+
+          <input type="text", name="clientName" placeholder="name"
+                 <%if (prevName.length != 0) { %>value="<%=prevName%>" <%}%> >
+
+          <input type="text" name="clientEmail" placeholder="email"
+                 <%if (prevEmail.length != 0) { %>value= "<%=prevEmail%>" <%}%> >
+
+        </div>
+
+        <div class="center_for_buttons">
+          <button formaction="/addingClient">Add Client</button>
+          <button formaction="/goToNotesPage">Proceed To Notes</button>
+        </div>
+
+      </form>
+
+    <!-- tell the client if a field is not valid: -->
+    <% if (invalid.length != 0) { %>
+
+      <!-- If the client list is invalid because it is empty and the user wants to
+      proceed to the notes page, tell them they can't: -->
+      <% if (invalid == "clientList") { %>
+        <p class="invalid_message"> Please include at least one client first</p>
+      <% } else { %>
+        <p class="invalid_message"> Invalid Client <%=invalid%> </p>
+      <% } %>
+
+    <% } %>
+
+    <div class="client_list">
+      <h3 class="client_list_heading"> Clients: </h3>
+
+      <% if (clientList.length == 0) { %>
+        <h class="no_client_message"> you have not yet added any clients </h>
+      <% } %>
+
+      <% for (var i = 0; i < clientList.length; i++) {
+          var currentClientJSONObject = clientList[i];
+          var clientName = currentClientJSONObject.name;
+          var clientEmail = currentClientJSONObject.email;
+      %>
+
+      <div class="client">
+          <li> name : <%=clientName%></li>
+          <li> email : <%=clientEmail%></li>
+
+          <form method = "post" >
+            <button formaction="/deleteUser?userID=<%=i%>"> Delete </button>
+          </form>
+      <% } %>
+      </div>
+
+    </div>
+
+  </body>
+</html>

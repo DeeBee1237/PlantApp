@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Notes Page</title>
+    <link rel='stylesheet' href='/stylesheets/notePageStyle.css' />
+</head>
+
+<body>
+
+<form method="post">
+    <p> Day :
+        <select name="dayForTask">
+            <option value=0>Monday</option>
+            <option value=1>Tuesday</option>
+            <option value=2>Wednesday</option>
+            <option value=3>Thursday</option>
+            <option value=4>Friday</option>
+            <option value=5>Saturday</option>
+            <option value=6>Sunday</option>
+        </select>
+    </p>
+
+    <p> Time:
+        <select name="time">
+            <option value=0>morning</option>
+            <option value=1>midday</option>
+            <option value=2>afternoon</option>
+        </select>
+    </p>
+
+    <div>
+        <input type="text" name="plant" placeholder="Plant Name">
+    </div>
+
+    <div>
+        <input type="text" name="location" placeholder="location">
+    </div>
+
+    <div>
+        <p> Task Specification:</p>
+        <textarea name="task" rows="15", cols = "60"></textarea>
+    </div>
+
+    <button formaction="/typeClientNotes/addTask">add</button>
+</form>
+
+<% if (plantNotes.length == 0){ %>
+<p>No plant tasks have been added yet</p>
+<%} else {%>
+<textarea name="clientNotes" rows="15", cols = "60"><%=plantNotes%></textarea>
+<%}%>
+
+</body>
+</html>
