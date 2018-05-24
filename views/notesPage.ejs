@@ -41,6 +41,10 @@
         <textarea name="task" rows="15", cols = "60"></textarea>
     </div>
 
+    <% if (invalidFieldName.length != 0) {%>
+        <p> Invalid <%=invalidFieldName%></p>
+    <%}%>
+
     <button formaction="/typeClientNotes/addTask">add</button>
 </form>
 

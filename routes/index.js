@@ -10,7 +10,7 @@ var objectToSendWithView = { title: 'Welcome to Plant Notes, Kiri', clientList:c
 
 
 // for validating the clients:
-var clientValidator = require("../public/javascripts/ClientValidator");
+var clientValidator = require("../public/javascripts/Validator");
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

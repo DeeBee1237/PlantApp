@@ -7,15 +7,26 @@
 // for email address validation:
 var emailValidator = require('email-validator');
 
+var validateInputField = function (inputFieldContents) {
+    return (inputFieldContents.length != 0 &&
+        inputFieldContents.trim().length != 0);
+};
+
 module.exports = {
 
     // a valid name means anything that isn't null or empty space:
     validateClientName : function (name) {
-        return (name.length != 0 && name.trim().length != 0);
+        return validateInputField(name);
     },
 
     validateClientEmail : function (email) {
         return emailValidator.validate(email);
+    },
+
+    // this will be used to validate the plant name, location and task
+    // input fields on the second page:
+    validateTaskInputField : function (taskInputField) {
+        return validateInputField(taskInputField);
     }
 
 };
