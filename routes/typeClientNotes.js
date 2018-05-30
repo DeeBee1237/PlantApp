@@ -64,6 +64,9 @@ router.post("/addTask",function (req,res) {
     var plantTaskJSON = {day : day, time : time, plant : plant,
         location : location, task : task};
 
+        // TODO save the latest input fields when rendering this page for a response
+    sendWithResponse =  Object.assign(sendWithResponse,plantTaskJSON);
+
     // validate the input fields:
     var fieldValidationValue = validateInputFields(plantTaskJSON);
     if (fieldValidationValue != "") {
@@ -79,8 +82,6 @@ router.post("/addTask",function (req,res) {
     var latestNotes = plantNoteGenerator.generatePlantNotes(plantTaskList);
     sendWithResponse["plantNotes"] = latestNotes;
 
-    // TODO save the latest input fields when rendering this page for a response
-    sendWithResponse =  Object.assign(sendWithResponse,plantTaskJSON);
     res.render('notesPage',sendWithResponse);
 });
 
