@@ -12,11 +12,11 @@ var validator = require('../public/javascripts/Validator');
 var plantTaskList = [];
 
 // send this with every response given to the client:
-var sendWithResponse = {plantNotes : "", invalidFieldName : ""};
+var sendWithResponse = {plantNotes : "", invalidFieldName : "",day : "", time : "", plant : "",
+    location : "", task : ""};
 
 // TODO create a view for this screen and email all the users at the end
 router.get('/',function (req,res,next) {
-    console.log(req.body);
     // req.body.query;
     var clients = JSON.parse(req.query.clientsToEmail);
 
@@ -79,6 +79,8 @@ router.post("/addTask",function (req,res) {
     var latestNotes = plantNoteGenerator.generatePlantNotes(plantTaskList);
     sendWithResponse["plantNotes"] = latestNotes;
 
+    // TODO save the latest input fields when rendering this page for a response
+    sendWithResponse =  Object.assign(sendWithResponse,plantTaskJSON);
     res.render('notesPage',sendWithResponse);
 });
 

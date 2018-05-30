@@ -10,21 +10,32 @@
 <form method="post">
     <p> Day :
         <select name="dayForTask">
-            <option value=0>Monday</option>
-            <option value=1>Tuesday</option>
-            <option value=2>Wednesday</option>
-            <option value=3>Thursday</option>
-            <option value=4>Friday</option>
-            <option value=5>Saturday</option>
-            <option value=6>Sunday</option>
+
+            <!--TODO remember the last field: -->
+            <% var weekDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]%>
+            <% for (var i = 0; i < weekDays.length; i++) { %>
+                <option value=<%=i%> <% if (day == i) {%> selected="selected"<%}%>><%=weekDays[i]%></option>
+            <% } %>
+           <!---->
+            <!--<option value=0>Monday</option>-->
+            <!--<option value=1>Tuesday</option>-->
+            <!--<option value=2>Wednesday</option>-->
+            <!--<option value=3>Thursday</option>-->
+            <!--<option value=4>Friday</option>-->
+            <!--<option value=5>Saturday</option>-->
+            <!--<option value=6>Sunday</option>-->
         </select>
     </p>
 
     <p> Time:
         <select name="time">
-            <option value=0>morning</option>
-            <option value=1>midday</option>
-            <option value=2>afternoon</option>
+            <% var times = ["morning","midday","afternoon"];%>
+            <%for (var i = 0; i < times.length; i++) {%>
+            <option value=<%=i%> <% if (time == i) {%> selected="selected"<%}%>><%=times[i]%></option>
+            <% } %>
+            <!--<option value=0>morning</option>-->
+            <!--<option value=1>midday</option>-->
+            <!--<option value=2>afternoon</option>-->
         </select>
     </p>
 
