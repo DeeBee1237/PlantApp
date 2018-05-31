@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
-var typeClientNotes = require('./routes/typeClientNotes')
+var typeClientNotes = require('./routes/typeClientNotes');
+var emailClients = require('./routes/emailClients');
 
 var app = express();
 
@@ -26,6 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/typeClientNotes',typeClientNotes);
+app.use('/emailClients',emailClients);
+
 // app.use('/addTask',typeClientNotes); // hmm
 
 // catch 404 and forward to error handler

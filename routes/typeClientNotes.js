@@ -15,20 +15,25 @@ var plantTaskList = [];
 var sendWithResponse = {plantNotes : "", invalidFieldName : "",day : "", time : "", plant : "",
     location : "", task : ""};
 
+// TODO send these to the emailCLients route:
+var latestNotes = "";
+var clientEmailDetails = {};
+
 // TODO create a view for this screen and email all the users at the end
 router.get('/',function (req,res,next) {
     // req.body.query;
-    var clients = JSON.parse(req.query.clientsToEmail);
+    var clients = req.query.clientsToEmail;
+    clientEmailDetails = clients;
 
-    var responseString = "";
-    for (var i = 0; i < clients.length; i++){
-        var client = clients[i];
-
-        var name = client.name;
-        var email = client.email;
-
-       responseString += ("Client: " + name + " , "  + email);
-    }
+    // var responseString = "";
+    // for (var i = 0; i < clients.length; i++){
+    //     var client = clients[i];
+    //
+    //     var name = client.name;
+    //     var email = client.email;
+    //
+    //    responseString += ("Client: " + name + " , "  + email);
+    // }
 
     res.render('notesPage',sendWithResponse);
 });
@@ -64,14 +69,14 @@ router.post("/addTask",function (req,res) {
     var plantTaskJSON = {day : day, time : time, plant : plant,
         location : location, task : task};
 
-        // TODO save the latest input fields when rendering this page for a response
     sendWithResponse =  Object.assign(sendWithResponse,plantTaskJSON);
 
     // validate the input fields:
     var fieldValidationValue = validateInputFields(plantTaskJSON);
     if (fieldValidationValue != "") {
-        // TODO show the error:
+        // show the error:
         sendWithResponse.invalidFieldName =  fieldValidationValue;
+        // TODO if any of the fields are invalid, then save the fields that have been entered:
         res.render('notesPage',sendWithResponse);
         sendWithResponse.invalidFieldName = "";
         return;
@@ -79,10 +84,16 @@ router.post("/addTask",function (req,res) {
 
     plantTaskList.push(plantTaskJSON);
 
-    var latestNotes = plantNoteGenerator.generatePlantNotes(plantTaskList);
+    latestNotes = plantNoteGenerator.generatePlantNotes(plantTaskList);
     sendWithResponse["plantNotes"] = latestNotes;
 
     res.render('notesPage',sendWithResponse);
+});
+
+router.post("/emailClients", function (req,res) {
+
+    res.redirect("/emailClients?data=" + JSON.stringify(clientEmailDetails) + ":" + JSON.stringify({notes : latestNotes}));
+        // +"latestNotes="+latestNotes);
 });
 
 module.exports = router;

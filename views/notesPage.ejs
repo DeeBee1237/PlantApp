@@ -16,14 +16,6 @@
             <% for (var i = 0; i < weekDays.length; i++) { %>
                 <option value=<%=i%> <% if (day == i) {%> selected="selected"<%}%>><%=weekDays[i]%></option>
             <% } %>
-           <!---->
-            <!--<option value=0>Monday</option>-->
-            <!--<option value=1>Tuesday</option>-->
-            <!--<option value=2>Wednesday</option>-->
-            <!--<option value=3>Thursday</option>-->
-            <!--<option value=4>Friday</option>-->
-            <!--<option value=5>Saturday</option>-->
-            <!--<option value=6>Sunday</option>-->
         </select>
     </p>
 
@@ -33,24 +25,23 @@
             <%for (var i = 0; i < times.length; i++) {%>
             <option value=<%=i%> <% if (time == i) {%> selected="selected"<%}%>><%=times[i]%></option>
             <% } %>
-            <!--<option value=0>morning</option>-->
-            <!--<option value=1>midday</option>-->
-            <!--<option value=2>afternoon</option>-->
         </select>
     </p>
 
     <div>
-        <input type="text" name="plant" placeholder="Plant Name">
+        <input type="text" name="plant" placeholder="Plant Name"
+        <%if (invalidFieldName.length > 0) {%> value = "<%=plant%>" <%}%>>
     </div>
 
     <div>
-        <input type="text" name="location" placeholder="location">
+        <input type="text" name="location" placeholder="location"
+        <%if (invalidFieldName.length > 0) { %> value = "<%=location%>" <%}%>>
     </div>
 
     <div>
-        <p> Task Specification:</p>
-        <textarea name="task" rows="15", cols = "60"></textarea>
+        <p> Task Specification:</p><textarea name="task" rows="15", cols = "60"><%if (invalidFieldName.length > 0) { %><%=task%><%}%></textarea>
     </div>
+
 
     <% if (invalidFieldName.length != 0) {%>
         <p> Invalid <%=invalidFieldName%></p>
@@ -64,6 +55,10 @@
 <%} else {%>
 <textarea name="clientNotes" rows="15", cols = "60"><%=plantNotes%></textarea>
 <%}%>
+
+<form method="post">
+    <button formaction="/typeClientNotes/emailClients"> email clients</button>
+</form>
 
 </body>
 </html>
