@@ -7,6 +7,8 @@ var router = express.Router();
 var clientList = {};
 var notes = "";
 
+var clientEmailer = require('../public/javascripts/ClientEmailer');
+
 router.get('/', function (req, res) {
     var data = JSON.parse(req.query.data);
     // get the client email and name data ready:
@@ -14,6 +16,7 @@ router.get('/', function (req, res) {
     notes = data.notes;
 
     // TODO creat JS module to send all clients and email with the notes
+    clientEmailer.sendEmails(clientList,notes);
 
     res.send("Your clients have been emailed :)");
 

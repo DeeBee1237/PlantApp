@@ -15,11 +15,10 @@ var plantTaskList = [];
 var sendWithResponse = {plantNotes : "", invalidFieldName : "",day : "", time : "", plant : "",
     location : "", task : ""};
 
-// TODO send these to the emailCLients route:
+//  send these to the emailCLients route:
 var latestNotes = "";
 var clientEmailDetails = {};
 
-// TODO create a view for this screen and email all the users at the end
 router.get('/',function (req,res,next) {
     // req.body.query;
     var clients = JSON.parse(req.query.clientsToEmail);
@@ -66,7 +65,6 @@ router.post("/addTask",function (req,res) {
     if (fieldValidationValue != "") {
         // show the error:
         sendWithResponse.invalidFieldName =  fieldValidationValue;
-        // TODO if any of the fields are invalid, then save the fields that have been entered:
         res.render('notesPage',sendWithResponse);
         sendWithResponse.invalidFieldName = "";
         return;
@@ -82,8 +80,10 @@ router.post("/addTask",function (req,res) {
 
 router.post("/emailClients", function (req,res) {
 
+    // TODO check if there are no notes first, and display an error message if this is the case
+
     // redirect the client to the emailing route, and send the email details array
-    // TODO as well as the notes string:
+    // as well as the notes string:
     var dataToSendToEmailingRoute = {clientDetails : clientEmailDetails , notes : latestNotes};
     var dataToSendEncoded = JSON.stringify(dataToSendToEmailingRoute);
     res.redirect("/emailClients?data=" + dataToSendEncoded);//JSON.stringify(clientEmailDetails));// + ":" + JSON.stringify({notes : latestNotes}));
