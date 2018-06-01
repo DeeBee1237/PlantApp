@@ -82,7 +82,7 @@ router.post("/goToNotesPage",function (req,res) {
     }
 
     else
-        res.redirect('/typeClientNotes?clientsToEmail=' + clients);
+        res.redirect('/typeClientNotes?clientsToEmail=' + JSON.stringify(clients));
 });
 
 

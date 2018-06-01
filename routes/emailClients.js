@@ -8,12 +8,14 @@ var clientList = {};
 var notes = "";
 
 router.get('/', function (req, res) {
-    var query = req.query;
-    var queryData = query.data.split(":");
-
+    var data = JSON.parse(req.query.data);
     // get the client email and name data ready:
-    clientList = JSON.parse(queryData[0]);
-    notes = JSON.parse(queryData[1].notes);
+    clientList = data.clientDetails;
+    notes = data.notes;
+
+    // TODO creat JS module to send all clients and email with the notes
+
+    res.send("Your clients have been emailed :)");
 
 });
 

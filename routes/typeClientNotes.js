@@ -22,18 +22,8 @@ var clientEmailDetails = {};
 // TODO create a view for this screen and email all the users at the end
 router.get('/',function (req,res,next) {
     // req.body.query;
-    var clients = req.query.clientsToEmail;
+    var clients = JSON.parse(req.query.clientsToEmail);
     clientEmailDetails = clients;
-
-    // var responseString = "";
-    // for (var i = 0; i < clients.length; i++){
-    //     var client = clients[i];
-    //
-    //     var name = client.name;
-    //     var email = client.email;
-    //
-    //    responseString += ("Client: " + name + " , "  + email);
-    // }
 
     res.render('notesPage',sendWithResponse);
 });
@@ -92,8 +82,11 @@ router.post("/addTask",function (req,res) {
 
 router.post("/emailClients", function (req,res) {
 
-    res.redirect("/emailClients?data=" + JSON.stringify(clientEmailDetails) + ":" + JSON.stringify({notes : latestNotes}));
-        // +"latestNotes="+latestNotes);
+    // redirect the client to the emailing route, and send the email details array
+    // TODO as well as the notes string:
+    var dataToSendToEmailingRoute = {clientDetails : clientEmailDetails , notes : latestNotes};
+    var dataToSendEncoded = JSON.stringify(dataToSendToEmailingRoute);
+    res.redirect("/emailClients?data=" + dataToSendEncoded);//JSON.stringify(clientEmailDetails));// + ":" + JSON.stringify({notes : latestNotes}));
 });
 
 module.exports = router;
