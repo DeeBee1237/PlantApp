@@ -80,7 +80,13 @@ router.post("/addTask",function (req,res) {
 
 router.post("/emailClients", function (req,res) {
 
-    // TODO check if there are no notes first, and display an error message if this is the case
+    // check if there are no notes first, and display an error message if this is the case
+    if (latestNotes.trim().length == 0) {
+        sendWithResponse.invalidFieldName = "notes";
+        res.render('notesPage',sendWithResponse);
+        sendWithResponse.invalidFieldName = "";
+        return;
+    }
 
     // redirect the client to the emailing route, and send the email details array
     // as well as the notes string:

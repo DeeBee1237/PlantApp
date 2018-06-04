@@ -44,7 +44,11 @@
 
 
     <% if (invalidFieldName.length != 0) {%>
+        <% if (invalidFieldName == "notes") { %>
+        <p> Please Include Some Task Notes Before Emailing Clients.</p>
+        <%} else {%>
         <p> Invalid <%=invalidFieldName%></p>
+        <% }%>
     <%}%>
 
     <button formaction="/typeClientNotes/addTask">add</button>
@@ -52,13 +56,14 @@
 
 <% if (plantNotes.length == 0){ %>
 <p>No plant tasks have been added yet</p>
-<%} else {%>
-<textarea name="clientNotes" rows="15", cols = "60"><%=plantNotes%></textarea>
+<%} else {%> <!-- TODO find a way to allow tasks to be deleted without changing this:-->
+<textarea name="clientNotes" rows="15", cols = "60" readonly><%=plantNotes%></textarea>
 <%}%>
 
 <form method="post">
     <button formaction="/typeClientNotes/emailClients"> email clients</button>
 </form>
+
 
 </body>
 </html>
