@@ -51,8 +51,10 @@
         <% }%>
     <%}%>
 
+    <div>
     <button formaction="/typeClientNotes/addTask">add</button>
-</form>
+    </div>
+<!--</form>-->
 
 <% if (plantNotes.length == 0){ %>
 <p>No plant tasks have been added yet</p>
@@ -60,8 +62,10 @@
 <textarea name="clientNotes" rows="15", cols = "60" readonly><%=plantNotes%></textarea>
 <%}%>
 
-<form method="post">
+<!--<form method="post">-->
+    <div>
     <button formaction="/typeClientNotes/emailClients"> email clients</button>
+    </div>
 </form>
 
 

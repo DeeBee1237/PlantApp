@@ -45,7 +45,10 @@ var validateInputFields = function (JSONTask) {
     return "";
 };
 
-router.post("/addTask",function (req,res) {
+// from the clients request, obtain the information that they
+// filled out in the fields and text area, and join it with the
+// send to response, so that if there is an error there fields are saved
+var obtainPlantTaskDataFromClientRequest = function (req) {
     var body = req.body;
 
     var day = body.dayForTask;
@@ -60,6 +63,26 @@ router.post("/addTask",function (req,res) {
 
     sendWithResponse =  Object.assign(sendWithResponse,plantTaskJSON);
 
+    return plantTaskJSON;
+};
+
+
+router.post("/addTask",function (req,res) {
+    // var body = req.body;
+    //
+    // var day = body.dayForTask;
+    // var time = body.time;
+    //
+    // var plant = body.plant;
+    // var location = body.location;
+    // var task = body.task;
+    //
+    // var plantTaskJSON = {day : day, time : time, plant : plant,
+    //     location : location, task : task};
+    //
+    // sendWithResponse =  Object.assign(sendWithResponse,plantTaskJSON);
+
+    plantTaskJSON = obtainPlantTaskDataFromClientRequest(req);
     // validate the input fields:
     var fieldValidationValue = validateInputFields(plantTaskJSON);
     if (fieldValidationValue != "") {
@@ -82,6 +105,11 @@ router.post("/emailClients", function (req,res) {
 
     // check if there are no notes first, and display an error message if this is the case
     if (latestNotes.trim().length == 0) {
+
+        // get the data from the client and concat it with the
+        // 'send-with-response' JSON object, in order to save all input fields:
+        obtainPlantTaskDataFromClientRequest(req);
+
         sendWithResponse.invalidFieldName = "notes";
         res.render('notesPage',sendWithResponse);
         sendWithResponse.invalidFieldName = "";
